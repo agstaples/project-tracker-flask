@@ -19,7 +19,7 @@
 			</tr>
 			{% for row in rows %}
 			<tr>
-				<td>{{ row[0] }}</td>
+				<td><a href="/project?title={{ row[0] }}">{{ row[0] }}</a></td>
 				<td>{{ row[1] }}</td>
 			</tr>
 			{% endfor %}

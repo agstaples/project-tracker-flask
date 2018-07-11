@@ -58,6 +58,20 @@ def make_new_student(first_name, last_name, github):
     print(f"Successfully added student: {first_name} {last_name}")
 
 
+def get_student_grade_by_title(title):
+    """returns the student name and grade, given the title"""
+
+    QUERY = """
+        SELECT first_name, last_name, grades.grade 
+        FROM students JOIN grades
+        ON github = student_github
+        WHERE project_title = :title
+        """
+    db_cursor = db.session.execute(QUERY, {'title': title})
+    rows = db_cursor.fetchall()
+    return rows
+
+
 def get_project_by_title(title):
     """Given a project title, print information about the project."""
 

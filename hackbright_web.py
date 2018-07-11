@@ -34,16 +34,36 @@ def student_add():
     return redirect(f"/student?github={github}")
 
 
+@app.route("/project")
+def show_project_info():
+    """Show information about specific project"""
+
+    title = request.args.get('title')
+
+    title, description, max_grade = hackbright.get_project_by_title(title)
+    rows = hackbright.get_student_grade_by_title(title)
+
+    return render_template("project-info.html",
+                           title=title,
+                           description=description,
+                           max_grade=max_grade,
+                           rows=rows)
+
 @app.route("/student")
 def get_student():
     """Show information about a student."""
 
     github = request.args.get('github')
-    print(hackbright.get_grades_by_github(github))
+    # print(hackbright.get_grades_by_github(github))
     first, last, github = hackbright.get_student_by_github(github)
     rows = hackbright.get_grades_by_github(github)
 
-    return render_template("student_info.html", first=first, last=last, github=github, rows=rows)
+    return render_template("student_info.html",
+                           first=first,
+                           last=last,
+                           github=github,
+                           rows=rows)
+
 
 if __name__ == "__main__":
     hackbright.connect_to_db(app)
