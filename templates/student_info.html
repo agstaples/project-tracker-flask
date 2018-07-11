@@ -11,6 +11,21 @@
 	</ul>
 	<h1>{{ first }} {{ last }}</h1>
 
+	<ul>
+		<table>
+			<tr>
+				<th>Project Name</th>
+				<th>Grade</th>
+			</tr>
+			{% for row in rows %}
+			<tr>
+				<td>{{ row[0] }}</td>
+				<td>{{ row[1] }}</td>
+			</tr>
+			{% endfor %}
+
+		</table>
+	</ul>
 	<p>GitHub Account: {{ github }}</p>
 </body>
 </html>
